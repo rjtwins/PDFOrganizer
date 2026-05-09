@@ -4,10 +4,13 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
+dirs = "6.0.0"
 iced = { version = "0.14.*", features = ["image"] }
 image = "0.25.10"
 pdfium-render = "0.9.1"
 rfd = "0.17.2"
+serde = { version = "1.0.219", features = ["derive"] }
+serde_json = "1.0.140"
 
 [build-dependencies]
 flate2 = "1.1.2"

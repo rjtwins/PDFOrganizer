@@ -29,7 +29,13 @@ The top section of the window is the **Destinations** panel.
 
 Important behavior:
 
-- Destinations are stored **in memory only**. They are not written to disk, so restarting the app clears them.
+- Destinations persist across restarts.
+- They are stored as JSON in the user's local app data folder under `PDFOrganizer\destinations.json`.
+- The app resolves that folder with `dirs::data_local_dir()`.
+- On Windows, that typically resolves to a path under `%LOCALAPPDATA%\PDFOrganizer\destinations.json`.
+- Saved destinations are loaded automatically when the app starts.
+- Adding or removing a destination immediately rewrites the JSON file.
+- If the storage path cannot be resolved, or the JSON file cannot be read or parsed, the app starts with an empty destination list and shows the error in the destinations panel.
 - The destinations list can be collapsed with **Hide Destinations** / **Show Destinations**.
 
 ### 2. Folder selection
@@ -111,10 +117,27 @@ The interface is organized into:
 Cargo.toml          Dependencies and package metadata
 build.rs            Downloads and stages the PDFium runtime library
 src\main.rs         Iced application state, update loop, and UI
-src\destination.rs  Destination management and file-moving logic
+src\destination.rs  Destination management, JSON persistence, and file-moving logic
 src\pdf_proc.rs     Folder scanning and PDF rendering
 src\main_tests.rs   App-level tests
 ```
+
+## Destination storage format
+
+Destinations are stored in a JSON object with a `destinations` map keyed by nickname.
+
+Example:
+
+```json
+{
+  "destinations": {
+    "Invoices": "C:\\Users\\You\\Documents\\Invoices",
+    "Archive": "D:\\PDF Archive"
+  }
+}
+```
+
+This file is managed by the app. Editing it manually is possible, but invalid JSON will prevent the saved destinations from loading.
 
 ## Build requirements
 
@@ -132,6 +155,14 @@ On Windows, installing Rust through [rustup](https://rustup.rs/) is the easiest 
 ## How the build works
 
 This project depends on the native PDFium library for rendering PDFs.
+
+The application code also uses:
+
+- `dirs` to locate the user's local app data directory,
+- `serde` and `serde_json` to serialize and deserialize destination data,
+- `rfd` for native folder pickers,
+- `iced` for the GUI,
+- `pdfium-render` for PDF preview generation.
 
 During `cargo build`:
 
@@ -179,6 +210,7 @@ cargo test
 The repository includes tests for:
 
 - destination creation and validation,
+- destination JSON persistence and reload behavior,
 - move behavior,
 - folder scanning,
 - resize and rerender behavior,
@@ -187,11 +219,11 @@ The repository includes tests for:
 
 ## Notes and current limitations
 
-- Destination folders are not persisted between runs.
 - Only files ending in lowercase `.pdf` are detected.
 - The folder scan is not recursive.
 - The app is designed for manual review and sorting, not automatic classification.
 - Large or complex PDFs may take longer to render because every page is previewed.
+- Destinations are persisted, but the currently selected source folder is not.
 
 ## Typical usage example
 

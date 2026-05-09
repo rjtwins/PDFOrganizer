@@ -150,7 +150,9 @@ fn update(state: &mut State, message: Message) -> Task<Message> {
             Task::none()
         }
         Message::RemoveDestination(nickname) => {
-            remove_destination(&mut state.destination_manager, &nickname);
+            if let Err(error) = remove_destination(&mut state.destination_manager, &nickname) {
+                state.destination_manager.error_message = Some(error);
+            }
             Task::none()
         }
         Message::SaveDestination => {
