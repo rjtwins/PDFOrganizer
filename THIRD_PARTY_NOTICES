@@ -1,0 +1,89 @@
+Third-party notices for PDFOrganizer
+====================================
+
+This project includes or depends on third-party software. Those components are
+licensed by their respective authors under their own terms.
+
+This file is a reference and attribution summary for the main third-party
+components directly used by PDFOrganizer and for the PDFium binary source chain
+used by the build script.
+
+1. iced
+License: MIT
+Source: https://github.com/iced-rs/iced
+
+Copyright:
+Copyright 2019 Hector Ramon, Iced contributors
+
+PDFOrganizer uses the `iced` Rust GUI framework.
+
+2. pdfium-render
+License: MIT OR Apache-2.0
+Source: https://github.com/ajrcarey/pdfium-render
+
+Author:
+Alastair Carey
+
+PDFOrganizer uses the `pdfium-render` Rust crate as the binding layer used to
+load PDFium and render PDF pages.
+
+3. PDFium binaries packaging
+License: MIT
+Source: https://github.com/bblanchon/pdfium-binaries
+
+Copyright:
+Copyright 2014-2025 Benoit Blanchon
+
+PDFOrganizer's `build.rs` downloads precompiled PDFium runtime binaries from
+the `bblanchon/pdfium-binaries` project.
+
+4. PDFium
+Primary upstream source: https://pdfium.googlesource.com/pdfium/
+Mirror: https://github.com/chromium/pdfium
+
+PDFium is the underlying PDF rendering library loaded at runtime by this
+project. The Chromium PDFium repository includes its own license file and may
+include additional notices for bundled upstream code.
+
+The top-level PDFium license begins with the following redistribution terms:
+
+Copyright 2014 The PDFium Authors
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+* Redistributions of source code must retain the above copyright notice, this
+  list of conditions and the following disclaimer.
+* Redistributions in binary form must reproduce the above copyright notice,
+  this list of conditions and the following disclaimer in the documentation
+  and/or other materials provided with the distribution.
+* Neither the name of Google Inc. nor the names of its contributors may be
+  used to endorse or promote products derived from this software without
+  specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR
+ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+5. Runtime binary download used by this project
+Downloaded from:
+https://github.com/bblanchon/pdfium-binaries/releases
+
+In this repository, `build.rs` currently targets the PDFium binaries release:
+chromium/7763
+
+Notes
+-----
+
+- Your own project code remains licensed under the LICENSE file in this
+  repository.
+- Third-party components remain under their own licenses.
+- If you distribute built binaries, keep this file with the distribution so the
+  PDFium binary attribution stays with the app materials.
