@@ -85,7 +85,7 @@ pub(crate) fn get_pdf_pages(
     let render_config = PdfRenderConfig::new()
         .set_target_width(render_width.into())
         .set_maximum_height(1080)
-        .rotate_if_landscape(PdfPageRenderRotation::Degrees90, true);
+        .rotate_if_landscape(PdfPageRenderRotation::None, true);
 
     let mut pages = Vec::new();
 

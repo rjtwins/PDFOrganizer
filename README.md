@@ -4,6 +4,12 @@ PDFOrganizer is a desktop GUI for sorting PDFs by previewing their pages and mov
 
 The app is written in Rust with [Iced](https://github.com/iced-rs/iced) for the interface, `pdfium-render` for PDF previews, and `rfd` for native folder pickers.
 
+## Agentic coding
+
+This project was completed fully with **agentic coding**.
+
+The implementation, preview integration, tests, and documentation updates were all carried out through an agent-driven development workflow rather than manual step-by-step editing alone.
+
 ## What the app does
 
 PDFOrganizer is built around a simple workflow:
